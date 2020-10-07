@@ -12,12 +12,9 @@ INC_PATH = ./inc
 OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
 
-INC_NAME =	minishell.h
-SRC_NAME =	main.c cmd.c echo.c
-LIB_NAME =	ft_init.c ft_lst.c ft_split_shell.c get_next_line.c \
-			get_next_line_utils.c ft_strdup.c ft_strcmp.c ft_split.c\
-			ft_add_char.c ft_init_tab.c
-
+INC_NAME = minishell.h
+SRC_NAME = clean.c error.c main.c minishell.c quit.c
+LIB_NAME = ft_putchar_fd.c ft_putstr_fd.c get_next_line.c get_next_line_utils.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
 
@@ -30,11 +27,16 @@ OBJLIB = $(addprefix $(OBJLIB_PATH)/,$(OBJLIB_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJLIB)
-	gcc -Wall -Wextra -Werror -o ${NAME} ${OBJLIB} ${OBJ}
+	${CC} -Wall -Wextra -Werror -o ${NAME} ${OBJLIB} ${OBJ}
+
+valgrind: $(OBJ) $(OBJLIB)
+	${CC} -Wall -Wextra -Werror -g -o ${NAME} ${OBJLIB} ${OBJ} 
+	valgrind --leak-check=full --show-leak-kinds=all ./minishell
+	#valgrind --leak-check=full ./minishell
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) -o $@ -c $<
+	${CC} -o $@ -c $<
 
 $(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
 	@mkdir $(OBJLIB_PATH) 2> /dev/null || true
@@ -47,6 +49,3 @@ fclean: clean
 	rm -rf ./obj $(NAME)
 
 re: fclean all
-
-norme:
-	@norminette $(SRC) $(LIB) $(INC)
