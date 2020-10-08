@@ -47,6 +47,6 @@ void		            quit(int code, t_mini *mini);
 void                    sigint_handler_cmd(int signal);
 void                    sigquit_handler_cmd(int signal);
 void                    sigint_handler_sh(int signal);
-void                    sigint_handler_sh(int signal);
+void                    sigquit_handler_sh(int signal);
 
 #endif

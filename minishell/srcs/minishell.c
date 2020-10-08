@@ -12,6 +12,8 @@ void		minishell(t_mini *mini)
 
 	while (1)
 	{
+		signal(SIGINT, sigint_handler_sh);
+		signal(SIGQUIT, sigquit_handler_sh);
 		print_prompt();
 		line = NULL;
 		if (FAILURE_GNL == (ret = get_next_line(0, &line)))
