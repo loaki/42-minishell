@@ -1,6 +1,6 @@
 .PHONY: all clean fclean re norme
 
-CC = gcc
+CC = clang-9
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -13,8 +13,8 @@ OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
 
 INC_NAME = minishell.h
-SRC_NAME = clean.c error.c main.c minishell.c quit.c
-LIB_NAME = ft_putchar_fd.c ft_putstr_fd.c get_next_line.c get_next_line_utils.c
+SRC_NAME = clean.c error.c main.c minishell.c quit.c signal.c
+LIB_NAME = ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c get_next_line.c get_next_line_utils.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
 
@@ -27,7 +27,7 @@ OBJLIB = $(addprefix $(OBJLIB_PATH)/,$(OBJLIB_NAME))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJLIB)
-	${CC} -Wall -Wextra -Werror -o ${NAME} ${OBJLIB} ${OBJ}
+	${CC} -Wall -Wextra -Werror -I ${INC_PATH} -o ${NAME} ${OBJLIB} ${OBJ}
 
 valgrind: $(OBJ) $(OBJLIB)
 	${CC} -Wall -Wextra -Werror -g -o ${NAME} ${OBJLIB} ${OBJ} 
@@ -36,7 +36,7 @@ valgrind: $(OBJ) $(OBJLIB)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	${CC} -o $@ -c $<
+	${CC} -I ${INC_PATH} -o $@ -c $<
 
 $(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
 	@mkdir $(OBJLIB_PATH) 2> /dev/null || true

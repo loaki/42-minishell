@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 
-void		display_prompt(void)
+void		print_prompt(void)
 {
 	ft_putstr_fd("Minishell$ ", 2);
 }
@@ -12,7 +12,7 @@ void		minishell(t_mini *mini)
 
 	while (1)
 	{
-		display_prompt();
+		print_prompt();
 		line = NULL;
 		if (FAILURE_GNL == (ret = get_next_line(0, &line)))
 			put_error_msg(FAILURE_GNL, NULL, NULL);
@@ -24,8 +24,8 @@ void		minishell(t_mini *mini)
 		else
 		{
 			ft_putstr_fd(line, 2);
-			//signal(SIGINT, sigint_handler_command);
-			//signal(SIGQUIT, sigquit_handler_command);
+			signal(SIGINT, sigint_handler_cmd);
+			signal(SIGQUIT, sigquit_handler_cmd);
 			//manage_line(line, mini);
 		}
 	}

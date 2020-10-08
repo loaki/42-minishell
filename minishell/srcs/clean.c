@@ -2,5 +2,5 @@
 
 void		clean_mini(t_mini *mini)
 {
-	initialize_mini(mini);
+	//initialize_mini(mini);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cchenot <cchenot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:47:51 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/12/11 13:47:22 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2020/10/08 21:01:40 by cchenot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int				get_next_line(int fd, char **line);
 
 void	        ft_putchar_fd(char c, int fd);
 void	        ft_putstr_fd(char *s, int fd);
+void	        ft_putnbr_fd(int n, int fd);
 
 #endif
