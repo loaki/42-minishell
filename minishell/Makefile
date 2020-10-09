@@ -1,6 +1,7 @@
 .PHONY: all clean fclean re norme
 
-CC = clang-9
+##CC = clang-9
+CC = clang -g ## clang-9 doesn't work ion my ubuntu
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -13,7 +14,7 @@ OBJ_PATH = ./obj
 OBJLIB_PATH = ./obj
 
 INC_NAME = minishell.h
-SRC_NAME = clean.c error.c main.c minishell.c quit.c signal.c
+SRC_NAME = clean.c error.c main.c minishell.c quit.c signal.c env_init.c
 LIB_NAME = ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c get_next_line.c get_next_line_utils.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJLIB_NAME = $(LIB_NAME:.c=.o)

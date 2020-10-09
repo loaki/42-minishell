@@ -29,10 +29,18 @@ typedef struct	s_cmd
 	struct s_cmd	*next;
 }				t_cmd;
 
+typedef struct		s_env
+{
+	char			*var;
+	char			*content;
+	struct s_env	*next;
+}					t_env;
+
 typedef struct	s_data
 {
 	t_hist 			*historic;
 	t_cmd			*lst_cmd;
+	t_env			*env_list;
 	int				exit;
 	char			path[1000];
 }				t_data;
@@ -47,11 +55,13 @@ void		ft_treat(t_data *data, char *line);
 void		get_cmd(t_data *data, t_cmd *new_cmd, char *cmd);
 void		get_cmd2(t_data *data, t_cmd *new_cmd, char **tmp);
 
+int			env_init(t_data *minishell, char **env);
 
 //------------------------------- CMD ------------------------------------
 
 void		pwd(char *path);
 int			echo(char *input, char *result);
+void		display_env(t_data *mini);
 
 
 //------------------------------- LIB ------------------------------------
@@ -63,6 +73,7 @@ void		ft_lstadd_front_cmd(t_data *data, t_cmd *new);
 char		**ft_split_shell(char const *str, char charset);
 void		ft_init_tab(int	*tab, int len);
 char 		*ft_add_char(char *str, char c);
+char		*ft_strndup(const char *s1, size_t len);
 
 //------------------------------------------------------------------------
 

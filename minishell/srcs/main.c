@@ -1,5 +1,12 @@
 #include "../inc/minishell.h"
 
+void		set_env_list(t_mini *mini, char **env)
+{
+	mini->env_list = NULL;
+	env_init(mini, env);
+	//display_env(mini);
+}
+
 void		initialize_mini(t_mini *mini)
 {
 }
@@ -11,6 +18,7 @@ int			main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+
 	/*g_sigint = false;
 	g_sigquit = false;
 	initialize_mini(&mini);
@@ -26,6 +34,7 @@ int			main(int argc, char **argv, char **env)
 		put_error_msg(ret, NULL, NULL);
 		quit(EXIT_FAILURE, &mini);
 	}*/
+	set_env_list(&mini, env);
 	minishell(&mini);
 	clean_mini(&mini);
 	return (0);
