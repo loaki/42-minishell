@@ -24,8 +24,16 @@
 bool                    g_sigint;
 bool                    g_sigquit;
 
+typedef struct			s_env
+{
+	char				*var;
+	char				*content;
+	struct s_env		*next;
+}						t_env;
+
 typedef struct			s_mini
 {
+	t_env				*env_list;
 }						t_mini;
 
 //lib
@@ -48,5 +56,9 @@ void                    sigint_handler_cmd(int signal);
 void                    sigquit_handler_cmd(int signal);
 void                    sigint_handler_sh(int signal);
 void                    sigquit_handler_sh(int signal);
+
+// env
+int						env_init(t_mini *minishell, char **env);
+void					display_env(t_mini *mini);
 
 #endif
