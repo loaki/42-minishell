@@ -12,22 +12,18 @@ void		minishell(t_mini *mini)
 
 	while (1)
 	{
-		signal(SIGINT, sigint_handler_sh);
-		signal(SIGQUIT, sigquit_handler_sh);
+		signal(SIGINT, sigint_handler_cmd);
+		signal(SIGQUIT, sigquit_handler_cmd);
 		print_prompt();
 		line = NULL;
 		if (FAILURE_GNL == (ret = get_next_line(0, &line)))
 			put_error_msg(FAILURE_GNL, NULL, NULL);
-		else if (EOF_GNL == ret)
-		{
-			ft_putstr_fd("exit\n", 2);
-			//quit(mini->lst_status, mini);
-		}
 		else
 		{
-			ft_putstr_fd(line, 2);
-			signal(SIGINT, sigint_handler_cmd);
-			signal(SIGQUIT, sigquit_handler_cmd);
+			//signal(SIGINT, sigint_handler_cmd);
+			//signal(SIGQUIT, sigquit_handler_cmd);
+			if (!strcmp(line, "exit"))
+				exit(0);
 			//manage_line(line, mini);
 		}
 	}
