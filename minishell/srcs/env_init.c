@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 04:16:34 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/09 05:23:33 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/10 04:53:14 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ void	display_env(t_mini *mini)
 		printf("%s=%s\n", tmp->var, tmp->content);
 		tmp = tmp->next;
 	}
+	/*
+	** un segfault est apparu ici donc je verifierai avec vous
+	** s'il se reproduit avant de valider ça
+	*/
+	//tmp->var = NULL;
+	//ft_putstr_fd(tmp->var, 2);
+	//ft_putstr_fd("=", 2);
+	//ft_putstr_fd(tmp->content, 2);
+	//ft_putstr_fd("\n", 2);
 	//printf("%s=%s\n", tmp->var, tmp->content);
 	free(tmp);
 }
@@ -94,6 +103,7 @@ int		env_init(t_mini *minishell, char **env)
 	i = -1;
 	if (!(tmp = malloc(sizeof(t_env))))
 		return (ENOMEM);
+	minishell->env_list = tmp;
 	while (env[++i])
 	{
 		if (!(elem = malloc(sizeof(t_env))))
@@ -107,10 +117,10 @@ int		env_init(t_mini *minishell, char **env)
 			return (ENOMEM);
 		}
 		ft_lstadd_back_env(&tmp, elem);
-		if (i == 1)
-			minishell->env_list = tmp;
 		tmp = tmp->next;
 	}
+	if (minishell->env_list->next)
+		minishell->env_list = minishell->env_list->next;
 	free(tmp);
 	return (0);
 }
