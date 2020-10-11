@@ -24,8 +24,6 @@ void		minishell(t_mini *mini)
 			//signal(SIGQUIT, sigquit_handler_cmd);
 			if (!strcmp(line, "exit"))
 				quit(0, mini);
-			if (!strcmp(line, "env"))
-				display_env(mini);
 			//manage_line(line, mini);
 		}
 	}

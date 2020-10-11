@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 04:16:34 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/10 04:53:14 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 00:51:22 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ void	display_env(t_mini *mini)
 	tmp = mini->env_list;
 	while (tmp->next)
 	{
-		printf("%s=%s\n", tmp->var, tmp->content);
+		printf("%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
 	/*
 	** un segfault est apparu ici donc je verifierai avec vous
 	** s'il se reproduit avant de valider ça
 	*/
-	//tmp->var = NULL;
-	//ft_putstr_fd(tmp->var, 2);
-	//ft_putstr_fd("=", 2);
-	//ft_putstr_fd(tmp->content, 2);
-	//ft_putstr_fd("\n", 2);
-	//printf("%s=%s\n", tmp->var, tmp->content);
+	// tmp->key = NULL;
+	// ft_putstr_fd(tmp->key, 2);
+	// ft_putstr_fd("=", 2);
+	// ft_putstr_fd(tmp->value, 2);
+	// ft_putstr_fd("\n", 2);
+	//printf("%s=%s\n", tmp->key, tmp->value);
 	free(tmp);
 }
 
@@ -78,17 +78,17 @@ int		get_env(char *str, t_env *list)
 	int		j;
 
 	i = 0;
-	list->content = NULL;
-	list->var = NULL;
+	list->value = NULL;
+	list->key = NULL;
 	while (str[i] && str[i] != '=')
 		i++;
-	if (!(list->var = ft_strndup(str, i)))
+	if (!(list->key = ft_strndup(str, i)))
 		return (-1);
 	i++;
 	j = 0;
 	while (str[i + j])
 		j++;
-	if (!(list->content = ft_strndup(str + i, j)))
+	if (!(list->value = ft_strndup(str + i, j)))
 		return (-1);
 	list->next = NULL;
 	return (0);
