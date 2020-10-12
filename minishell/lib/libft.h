@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:47:51 by jfeuilla          #+#    #+#             */
-/*   Updated: 2020/10/12 02:18:48 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 02:27:37 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int				get_next_line(int fd, char **line);
 
 void	        ft_putchar_fd(char c, int fd);
 void	        ft_putstr_fd(char *s, int fd);
+void			ft_putstr_fd_and_color(char *s, int fd, char *color);
 void	        ft_putnbr_fd(int n, int fd);
 
 /*
