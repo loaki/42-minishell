@@ -6,18 +6,18 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 06:00:04 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/12 06:16:44 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 07:34:42 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* 
-**	EN COURS
-*/
+int			compare_env_key(t_env *env, char *key)
+{
+	return (ft_strcmp(env->key, key));
+}
 
-/*
-int			get_dup_env_var_value(char **str, char *key, t_mini *mini)
+int			search_key_in_env(char **str, char *key, t_mini *mini)
 {
 	t_list		*current;
 	t_env		*env;
@@ -39,13 +39,12 @@ int			get_dup_env_var_value(char **str, char *key, t_mini *mini)
 	return (ERROR_KEY_NOT_FOUND);
 }
 
-int			initialize_lst_word(t_mini *mini)
+int			initialize_last_word(t_mini *mini)
 {
 	int		ret;
 
-	if (SUCCESS != (ret = get_dup_env_var_value(&(mini->last_word), "_", mini)))
+	if (SUCCESS != (ret = search_key_in_env(&(mini->last_word), "_", mini)))
 		return (ret);
-	ft_lstremove_if(&(mini->env_list), "_", compare_env_var, clean_env_var);
+	ft_lstremove_if(&(mini->env_list), "_", compare_env_key, clean_env_var);
 	return (SUCCESS);
 }
-*/

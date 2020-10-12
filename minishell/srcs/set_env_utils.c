@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 01:17:55 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/12 05:58:26 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 07:47:07 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		clean_env_var(void *content)
 // BOLDCYAN			"\033[1m\033[36m"
 // BOLDWHITE		"\033[1m\033[37m"
 
-void	display_env(t_mini *minishell)
+void	display_env_list(t_mini *minishell)
 {
 	t_list	*tmp;
 	t_env	*aff;
@@ -82,5 +82,17 @@ void	display_env(t_mini *minishell)
 		ft_putstr_fd_and_color(aff->value, 1, 0);
 		ft_putstr_fd_and_color("\n", 1, 0);
 		tmp = tmp->next;
+	}
+}
+
+void	display_env(t_mini *minishell)
+{
+	int i;
+
+	i = -1;
+	while (minishell->env_tab[++i])
+	{
+		ft_putstr_fd(minishell->env_tab[i], 1);
+		ft_putstr_fd("\n", 1);
 	}
 }

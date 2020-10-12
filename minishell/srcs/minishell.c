@@ -32,7 +32,7 @@ void		minishell(t_mini *mini)
 			if (!ft_strcmp(line, "exit"))
 				quit(0, mini);
 			if (!ft_strcmp(line, "env"))
-				display_env(mini);
+				display_env(mini);			
 			//manage_line(line, mini);
 		}
 	}

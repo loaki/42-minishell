@@ -86,4 +86,7 @@ bool					is_initialized(char *env_line);
 void					clean_env_var(void *content);
 void					display_env(t_mini *minishell);
 
+// initialize_last_word.c
+int						initialize_last_word(t_mini *mini);
+
 #endif

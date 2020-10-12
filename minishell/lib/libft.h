@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:47:51 by jfeuilla          #+#    #+#             */
-/*   Updated: 2020/10/12 06:05:18 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 07:33:34 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ int				ft_strcmp(const char *s1, const char *s2);
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_back(t_list **alst, t_list *new);
 void			ft_lstclear(t_list **lst, void (*del)(void*));
+void			ft_lstremove_if(t_list **begin_list, void *data_ref,
+										int (*cmp)(), void (*clean_fct)());
 
 #endif

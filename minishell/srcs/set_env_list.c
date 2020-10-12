@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 01:05:30 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/12 05:04:06 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 07:26:59 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ int			set_env_list(t_mini *mini, char **env)
 	while (env[++i])
 		if (SUCCESS != (ret = add_new_env_var(env[i], mini)))
 			return (ret);
+
 	return (SUCCESS);
 }

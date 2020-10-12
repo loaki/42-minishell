@@ -9,7 +9,9 @@ int			main(int argc, char **argv, char **env)
 	(void)argv;
 
 	initialize_mini(&mini);
-	if (SUCCESS != (ret = set_env_list(&mini, env)))
+	if (SUCCESS != (ret = set_env_list(&mini, env))
+		|| SUCCESS != (ret = initialize_last_word(&mini))
+		|| SUCCESS != (ret = set_env_tab(&mini)))
 		quit(EXIT_FAILURE, &mini);
 	/*g_sigint = false;
 	g_sigquit = false;
