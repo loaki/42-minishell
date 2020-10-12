@@ -37,22 +37,14 @@ typedef struct			s_env
 
 typedef struct			s_data
 {
-<<<<<<< HEAD
 	t_env				*env_list;
 }						t_data;
-=======
-	char				**env_tab;
-	char				*last_word;
-	t_list				*env_list;
-}						t_mini;
->>>>>>> 1a1faa4fb971d8710c3fce5193f6a1c4275f81c6
 
 //lib
 void	                ft_putstr_fd(char *s, int fd);
 int		                get_next_line(int fd, char **line);
 
 //clean
-<<<<<<< HEAD
 void		            clean_mini(t_data *data);
 //error
 void		            put_error_msg(int error_code, char *id1, char *id2);
@@ -63,7 +55,6 @@ void		            print_prompt(void);
 void		            minishell(t_data *data);
 //quit
 void		            quit(int code, t_data *data);
-=======
 void		            clean_mini(t_mini *mini);
 
 //clean_utils.c
@@ -81,36 +72,32 @@ void		            minishell(t_mini *mini);
 //quit
 void		            quit(int code, t_mini *mini);
 
->>>>>>> 1a1faa4fb971d8710c3fce5193f6a1c4275f81c6
 //signal
 void                    sigint_handler_cmd(int signal);
 void                    sigquit_handler_cmd(int signal);
 void                    sigint_handler_sh(int signal);
 void                    sigquit_handler_sh(int signal);
 
-<<<<<<< HEAD
 // env
 int						env_init(t_data *data, char **env);
 void					display_env(t_data *data);
-=======
 //set_env_list.c
 char					*get_key_from_env_line(char *env_line);
 char					*get_value_from_env_line(char *env_line);
-int						add_new_env_var(char *env_line, t_mini *mini);
-int						set_env_list(t_mini *mini, char **env);
+int						add_new_env_var(char *env_line, t_data *data);
+int						set_env_list(t_data *data, char **env);
 
 //set_env_tabs.c
-int						set_env_tab(t_mini *mini);
+int						set_env_tab(t_data *data);
 
 //set_env_utils.c
 int						empty_variable(t_env *env);
 int						is_end_key(char *str, int index);
 bool					is_initialized(char *env_line);
 void					clean_env_var(void *content);
-void					display_env(t_mini *minishell);
+void					display_env(t_data *data);
 
 // initialize_last_word.c
-int						initialize_last_word(t_mini *mini);
->>>>>>> 1a1faa4fb971d8710c3fce5193f6a1c4275f81c6
+int						initialize_last_word(t_data *data);
 
 #endif

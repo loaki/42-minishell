@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchenot <cchenot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 01:05:30 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/12 07:26:59 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 19:16:30 by cchenot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static t_env	*create_new_env_var(char *env_line)
 	return (new_env_var);
 }
 
-int					add_new_env_var(char *env_line, t_mini *mini)
+int					add_new_env_var(char *env_line, t_data *data)
 {
 	t_env		*new_env_var;
 	t_list		*new_element;
@@ -86,18 +86,18 @@ int					add_new_env_var(char *env_line, t_mini *mini)
 		clean_env_var(new_env_var);
 		return (ENOMEM);
 	}
-	ft_lstadd_back(&(mini->env_list), new_element);
+	ft_lstadd_back(&(data->env_list), new_element);
 	return (SUCCESS);
 }
 
-int			set_env_list(t_mini *mini, char **env)
+int			set_env_list(t_data *data, char **env)
 {
 	int		i;
 	int		ret;
 
 	i = -1;
 	while (env[++i])
-		if (SUCCESS != (ret = add_new_env_var(env[i], mini)))
+		if (SUCCESS != (ret = add_new_env_var(env[i], data)))
 			return (ret);
 
 	return (SUCCESS);

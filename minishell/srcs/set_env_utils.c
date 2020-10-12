@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchenot <cchenot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 01:17:55 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/12 07:47:07 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 19:18:58 by cchenot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void		clean_env_var(void *content)
 // BOLDCYAN			"\033[1m\033[36m"
 // BOLDWHITE		"\033[1m\033[37m"
 
-void	display_env_list(t_mini *minishell)
+void	display_env_list(t_data *data)
 {
 	t_list	*tmp;
 	t_env	*aff;
 
-	tmp = minishell->env_list;
+	tmp = data->env_list;
 	while (tmp)
 	{
 		aff = tmp->content;
@@ -85,14 +85,14 @@ void	display_env_list(t_mini *minishell)
 	}
 }
 
-void	display_env(t_mini *minishell)
+void	display_env(t_data *data)
 {
 	int i;
 
 	i = -1;
-	while (minishell->env_tab[++i])
+	while (data->env_tab[++i])
 	{
-		ft_putstr_fd(minishell->env_tab[i], 1);
+		ft_putstr_fd(data->env_tab[i], 1);
 		ft_putstr_fd("\n", 1);
 	}
 }
