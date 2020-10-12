@@ -17,6 +17,9 @@
 # include <signal.h>
 # include "../lib/libft.h"
 
+# define SUCCESS 0
+# define FAILURE 1
+
 # ifndef OPEN_MAX
 #  define OPEN_MAX 4000
 # endif
@@ -28,11 +31,11 @@ typedef struct			s_env
 {
 	char				*key;
 	char				*value;
-	struct s_env		*next;
 }						t_env;
 
 typedef struct			s_mini
 {
+	t_list				*env_list;
 }						t_mini;
 
 //lib
@@ -57,6 +60,9 @@ void                    sigint_handler_sh(int signal);
 void                    sigquit_handler_sh(int signal);
 
 // env
-
+void					clean_env_var(void *content);
+void					ft_lstadd_back_env(t_env **alst, t_env *new);
+int						is_end_key(char *str, int index);
+bool					is_initialized(char *env_line);
 
 #endif

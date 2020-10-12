@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchenot <cchenot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:47:51 by jfeuilla          #+#    #+#             */
-/*   Updated: 2020/10/08 21:01:40 by cchenot          ###   ########.fr       */
+/*   Updated: 2020/10/12 01:55:18 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 #  define OPEN_MAX 4000
 # endif
 
+typedef struct		s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
 //get_next_line
 char			*ft_strdup(char *src);
 int				ft_substr(char *s, unsigned int start, size_t len);
@@ -39,5 +45,11 @@ int				get_next_line(int fd, char **line);
 void	        ft_putchar_fd(char c, int fd);
 void	        ft_putstr_fd(char *s, int fd);
 void	        ft_putnbr_fd(int n, int fd);
+
+/*
+**	list
+*/
+t_list			*ft_lstnew(void *content);
+void			ft_lstadd_back(t_list **alst, t_list *new);
 
 #endif
