@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/12 01:42:48 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/12 02:00:33 by lulebugl         ###   ########.fr       */
+/*   Created: 2020/10/12 02:17:48 by lulebugl          #+#    #+#             */
+/*   Updated: 2020/10/12 02:17:56 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
 	t_list	*current_element;
+	t_list	*tmp;
 
-	if (!alst)
+	if (!lst || !*lst)
 		return ;
-	if (!*alst)
-		*alst = new;
-	else
+	current_element = *lst;
+	while (current_element)
 	{
-		current_element = *alst;
-		while (current_element->next)
-			current_element = current_element->next;
-		current_element->next = new;
+		tmp = current_element;
+		current_element = current_element->next;
+		(*del)(tmp->content);
+		free(tmp);
 	}
+	*lst = (void*)0;
 }

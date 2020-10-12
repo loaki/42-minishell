@@ -60,9 +60,11 @@ void                    sigint_handler_sh(int signal);
 void                    sigquit_handler_sh(int signal);
 
 // env
+int						set_env_list(t_mini *mini, char **env);
 void					clean_env_var(void *content);
 void					ft_lstadd_back_env(t_env **alst, t_env *new);
 int						is_end_key(char *str, int index);
 bool					is_initialized(char *env_line);
+void					display_env(t_mini *minishell);
 
 #endif

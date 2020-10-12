@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 01:17:55 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/12 01:48:38 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 02:13:58 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,21 @@ void		clean_env_var(void *content)
 	if (env_var->value)
 		free(env_var->value);
 	free(env_var);
+}
+
+void	display_env(t_mini *minishell)
+{
+	t_list	*tmp;
+	t_env	*aff;
+
+	tmp = minishell->env_list;
+	while (tmp)
+	{
+		aff = tmp->content;
+		ft_putstr_fd(aff->key, 1);
+		ft_putstr_fd("=", 1);
+		ft_putstr_fd(aff->value, 1);
+		ft_putstr_fd("\n", 1);
+		tmp = tmp->next;
+	}
 }

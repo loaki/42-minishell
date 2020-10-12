@@ -2,6 +2,7 @@
 
 void		initialize_mini(t_mini *mini)
 {
+	mini->env_list = NULL;
 }
 
 int			main(int argc, char **argv, char **env)
@@ -13,6 +14,8 @@ int			main(int argc, char **argv, char **env)
 	(void)argv;
 
 	initialize_mini(&mini);
+	if (SUCCESS != (ret = set_env_list(&mini, env)))
+		quit(EXIT_FAILURE, &mini);
 	/*g_sigint = false;
 	g_sigquit = false;
 	mini.lst_status = 0;
