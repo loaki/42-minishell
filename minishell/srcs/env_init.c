@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchenot <cchenot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 04:16:34 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/09 05:23:33 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:02:26 by cchenot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	display_env(t_mini *mini)
+void	display_env(t_data *data)
 {
 	t_env	*tmp;
 
-	tmp = mini->env_list;
+	tmp = data->env_list;
 	while (tmp->next)
 	{
 		printf("%s=%s\n", tmp->var, tmp->content);
@@ -85,7 +85,7 @@ int		get_env(char *str, t_env *list)
 	return (0);
 }
 
-int		env_init(t_mini *minishell, char **env)
+int		env_init(t_data *data, char **env)
 {
 	int		i;
 	t_env	*elem;
@@ -108,7 +108,7 @@ int		env_init(t_mini *minishell, char **env)
 		}
 		ft_lstadd_back_env(&tmp, elem);
 		if (i == 1)
-			minishell->env_list = tmp;
+			data->env_list = tmp;
 		tmp = tmp->next;
 	}
 	free(tmp);

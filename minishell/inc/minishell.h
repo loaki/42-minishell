@@ -31,26 +31,26 @@ typedef struct			s_env
 	struct s_env		*next;
 }						t_env;
 
-typedef struct			s_mini
+typedef struct			s_data
 {
 	t_env				*env_list;
-}						t_mini;
+}						t_data;
 
 //lib
 void	                ft_putstr_fd(char *s, int fd);
 int		                get_next_line(int fd, char **line);
 
 //clean
-void		            clean_mini(t_mini *mini);
+void		            clean_mini(t_data *data);
 //error
 void		            put_error_msg(int error_code, char *id1, char *id2);
 //main
-void		            initialize_mini(t_mini *mini);
+void		            initialize_mini(t_data *data);
 //minishell
 void		            print_prompt(void);
-void		            minishell(t_mini *mini);
+void		            minishell(t_data *data);
 //quit
-void		            quit(int code, t_mini *mini);
+void		            quit(int code, t_data *data);
 //signal
 void                    sigint_handler_cmd(int signal);
 void                    sigquit_handler_cmd(int signal);
@@ -58,7 +58,7 @@ void                    sigint_handler_sh(int signal);
 void                    sigquit_handler_sh(int signal);
 
 // env
-int						env_init(t_mini *minishell, char **env);
-void					display_env(t_mini *mini);
+int						env_init(t_data *data, char **env);
+void					display_env(t_data *data);
 
 #endif

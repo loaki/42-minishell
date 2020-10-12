@@ -5,7 +5,7 @@ void		print_prompt(void)
 	ft_putstr_fd("Minishell$ ", 2);
 }
 
-void		minishell(t_mini *mini)
+void		minishell(t_data *data)
 {
 	char	*line;
 	int		ret;

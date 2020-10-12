@@ -1,7 +1,7 @@
 #include "../inc/minishell.h"
 
-void		quit(int code, t_mini *mini)
+void		quit(int code, t_data *data)
 {
-	clean_mini(mini);
+	clean_mini(data);
 	exit(code);
 }

@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 
-void		clean_mini(t_mini *mini)
+void		clean_mini(t_data *data)
 {
 	//initialize_mini(mini);
 }

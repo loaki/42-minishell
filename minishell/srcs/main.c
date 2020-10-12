@@ -1,19 +1,19 @@
 #include "../inc/minishell.h"
 
-void		set_env_list(t_mini *mini, char **env)
+void		set_env_list(t_data *data, char **env)
 {
-	mini->env_list = NULL;
-	env_init(mini, env);
+	data->env_list = NULL;
+	env_init(data, env);
 	//display_env(mini);
 }
 
-void		initialize_mini(t_mini *mini)
+void		initialize_mini(t_data *data)
 {
 }
 
 int			main(int argc, char **argv, char **env)
 {
-	t_mini		mini;
+	t_data		data;
 	int			ret;
 
 	(void)argc;
@@ -34,8 +34,8 @@ int			main(int argc, char **argv, char **env)
 		put_error_msg(ret, NULL, NULL);
 		quit(EXIT_FAILURE, &mini);
 	}*/
-	set_env_list(&mini, env);
-	minishell(&mini);
-	clean_mini(&mini);
+	set_env_list(&data, env);
+	minishell(&data);
+	clean_mini(&data);
 	return (0);
 }
