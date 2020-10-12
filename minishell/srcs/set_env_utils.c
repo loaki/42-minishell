@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   set_env_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 01:17:55 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/12 02:35:56 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/12 05:58:26 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		empty_variable(t_env *env)
+{
+	if (!env->value)
+		return (1);
+	return (0);
+}
 
 bool		is_initialized(char *env_line)
 {
@@ -28,7 +35,7 @@ int		is_end_key(char *str, int index)
 	return (str[index] == '='
 			|| (str[index + 1]
 				&& str[index + 1] == '='
-				&& str[index] == '+'));
+				&& str[index] == '+')); // Dans quel cas??
 }
 
 void		clean_env_var(void *content)

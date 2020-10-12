@@ -1,10 +1,5 @@
 #include "../inc/minishell.h"
 
-void		initialize_mini(t_mini *mini)
-{
-	mini->env_list = NULL;
-}
-
 int			main(int argc, char **argv, char **env)
 {
 	t_mini		mini;

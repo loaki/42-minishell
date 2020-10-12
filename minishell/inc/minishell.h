@@ -19,6 +19,8 @@
 
 # define SUCCESS 0
 # define FAILURE 1
+# define ERROR_KEY_NOT_FOUND -4
+# define ERROR_VALUE_NOT_FOUND -5
 
 # ifndef OPEN_MAX
 #  define OPEN_MAX 4000
@@ -35,6 +37,8 @@ typedef struct			s_env
 
 typedef struct			s_mini
 {
+	char				**env_tab;
+	char				*last_word;
 	t_list				*env_list;
 }						t_mini;
 
@@ -44,27 +48,42 @@ int		                get_next_line(int fd, char **line);
 
 //clean
 void		            clean_mini(t_mini *mini);
+
+//clean_utils.c
+void					ft_clean_tab(char **tab);
+void					ft_clean_tab_index(char **tab, int index);
+
 //error
 void		            put_error_msg(int error_code, char *id1, char *id2);
-//main
-void		            initialize_mini(t_mini *mini);
+
 //minishell
 void		            print_prompt(void);
+void		            initialize_mini(t_mini *mini);
 void		            minishell(t_mini *mini);
+
 //quit
 void		            quit(int code, t_mini *mini);
+
 //signal
 void                    sigint_handler_cmd(int signal);
 void                    sigquit_handler_cmd(int signal);
 void                    sigint_handler_sh(int signal);
 void                    sigquit_handler_sh(int signal);
 
-// env
+//set_env_list.c
+char					*get_key_from_env_line(char *env_line);
+char					*get_value_from_env_line(char *env_line);
+int						add_new_env_var(char *env_line, t_mini *mini);
 int						set_env_list(t_mini *mini, char **env);
-void					clean_env_var(void *content);
-void					ft_lstadd_back_env(t_env **alst, t_env *new);
+
+//set_env_tabs.c
+int						set_env_tab(t_mini *mini);
+
+//set_env_utils.c
+int						empty_variable(t_env *env);
 int						is_end_key(char *str, int index);
 bool					is_initialized(char *env_line);
+void					clean_env_var(void *content);
 void					display_env(t_mini *minishell);
 
 #endif

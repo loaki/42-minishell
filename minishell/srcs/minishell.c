@@ -5,6 +5,13 @@ void		print_prompt(void)
 	ft_putstr_fd("Minishell$ ", 2);
 }
 
+void		initialize_mini(t_mini *mini)
+{
+	mini->env_list = NULL;
+	mini->env_tab = NULL;
+	mini->last_word = NULL;	
+}
+
 void		minishell(t_mini *mini)
 {
 	char	*line;
@@ -22,9 +29,9 @@ void		minishell(t_mini *mini)
 		{
 			//signal(SIGINT, sigint_handler_cmd);
 			//signal(SIGQUIT, sigquit_handler_cmd);
-			if (!strcmp(line, "exit"))
+			if (!ft_strcmp(line, "exit"))
 				quit(0, mini);
-			if (!strcmp(line, "env"))
+			if (!ft_strcmp(line, "env"))
 				display_env(mini);
 			//manage_line(line, mini);
 		}
