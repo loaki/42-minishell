@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cchenot <cchenot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 05:00:32 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/12 19:17:58 by cchenot          ###   ########.fr       */
+/*   Updated: 2020/10/13 07:08:00 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	fill_env_tab(t_data *data)
 	{
 		if (!empty_variable(current->content))
 		{
-			if (!(mini->env_tab[i] = get_env_str(current->content)))
+			if (!(data->env_tab[i] = get_env_str(current->content)))
 			{
 				ft_clean_tab_index(data->env_tab, i);
 				data->env_tab = NULL;
@@ -72,7 +72,7 @@ static int	fill_env_tab(t_data *data)
 		}
 		current = current->next;
 	}
-	if (!(last_word = ft_str_join("_=", mini->last_word)))
+	if (!(last_word = ft_str_join("_=", data->last_word)))
 		return (ENOMEM);
 	data->env_tab[i++] = last_word;
 	data->env_tab[i] = NULL;

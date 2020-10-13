@@ -37,7 +37,9 @@ typedef struct			s_env
 
 typedef struct			s_data
 {
-	t_env				*env_list;
+	char				**env_tab;
+	char				*last_word;
+	t_list				*env_list;
 }						t_data;
 
 //lib
@@ -55,7 +57,7 @@ void		            print_prompt(void);
 void		            minishell(t_data *data);
 //quit
 void		            quit(int code, t_data *data);
-void		            clean_mini(t_mini *mini);
+void		            clean_mini(t_data *mini);
 
 //clean_utils.c
 void					ft_clean_tab(char **tab);
@@ -66,11 +68,11 @@ void		            put_error_msg(int error_code, char *id1, char *id2);
 
 //minishell
 void		            print_prompt(void);
-void		            initialize_mini(t_mini *mini);
-void		            minishell(t_mini *mini);
+void		            initialize_mini(t_data *mini);
+void		            minishell(t_data *mini);
 
 //quit
-void		            quit(int code, t_mini *mini);
+void		            quit(int code, t_data *mini);
 
 //signal
 void                    sigint_handler_cmd(int signal);

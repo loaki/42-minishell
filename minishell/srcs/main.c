@@ -1,19 +1,5 @@
 #include "../inc/minishell.h"
 
-<<<<<<< HEAD
-void		set_env_list(t_data *data, char **env)
-{
-	data->env_list = NULL;
-	env_init(data, env);
-	//display_env(mini);
-}
-
-void		initialize_mini(t_data *data)
-{
-}
-
-=======
->>>>>>> 1a1faa4fb971d8710c3fce5193f6a1c4275f81c6
 int			main(int argc, char **argv, char **env)
 {
 	t_data		data;
@@ -22,11 +8,11 @@ int			main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 
-	initialize_mini(&mini);
-	if (SUCCESS != (ret = set_env_list(&mini, env))
-		|| SUCCESS != (ret = initialize_last_word(&mini))
-		|| SUCCESS != (ret = set_env_tab(&mini)))
-		quit(EXIT_FAILURE, &mini);
+	initialize_mini(&data);
+	if (SUCCESS != (ret = set_env_list(&data, env))
+		|| SUCCESS != (ret = initialize_last_word(&data))
+		|| SUCCESS != (ret = set_env_tab(&data)))
+		quit(EXIT_FAILURE, &data);
 	/*g_sigint = false;
 	g_sigquit = false;
 	mini.lst_status = 0;
@@ -41,14 +27,8 @@ int			main(int argc, char **argv, char **env)
 		put_error_msg(ret, NULL, NULL);
 		quit(EXIT_FAILURE, &mini);
 	}*/
-<<<<<<< HEAD
-	set_env_list(&data, env);
+
 	minishell(&data);
 	clean_mini(&data);
-=======
-
-	minishell(&mini);
-	clean_mini(&mini);
->>>>>>> 1a1faa4fb971d8710c3fce5193f6a1c4275f81c6
 	return (0);
 }

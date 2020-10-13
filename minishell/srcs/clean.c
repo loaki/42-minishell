@@ -14,10 +14,10 @@
 
 void		clean_mini(t_data *data)
 {
-	ft_lstclear(&(mini->env_list), clean_env_var);
-	if (mini->env_tab)
-		ft_clean_tab(mini->env_tab);
-	if (mini->last_word)
-		free(mini->last_word);
-	initialize_mini(mini);
+	ft_lstclear(&(data->env_list), clean_env_var);
+	if (data->env_tab)
+		ft_clean_tab(data->env_tab);
+	if (data->last_word)
+		free(data->last_word);
+	initialize_mini(data);
 }
