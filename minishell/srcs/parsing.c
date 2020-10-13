@@ -9,7 +9,7 @@ bool		is_new_command(char *str, int index)
 					&& (str[index - 1] == ';' || str[index - 1] == '|'))));
 }
 
-int			parse_line(char *line, t_mini *mini)
+int			parse_line(char *line, t_data *data)
 {
 	int		i;
 	int		ret;
@@ -19,7 +19,7 @@ int			parse_line(char *line, t_mini *mini)
 	{
 		if (is_new_command(line, i))
 		{
-			if (SUCCESS != (ret = add_new_command(line + i, mini)))
+			if (SUCCESS != (ret = add_new_command(line + i, data)))
 				return (ret);
 		}
 		i++;
@@ -53,17 +53,17 @@ static int	set_last_and_previous_word(t_mini *mini)
 }
 */
 
-void	manage_line(char *line, t_mini *mini)
+void	manage_line(char *line, t_data *data)
 {
 	int			ret;
 
 	//sigint_check(mini);
 	//sigquit_check(mini);
-	if (SUCCESS != (ret = parse_line(line, mini)))
+	if (SUCCESS != (ret = parse_line(line, data)))
 	{
 		free(line);
 		//ft_lstclear(&(mini->cmd_list), clean_command);
-		mini->cmd_list = NULL;
+		data->cmd_list = NULL;
 		put_error_msg(ret, "line parsing", NULL);
 		//mini->lst_status = ret;
 		return ;
@@ -81,5 +81,5 @@ void	manage_line(char *line, t_mini *mini)
 	//ft_lstclear(&(mini->cmd_list), clean_command);
 	mini->cmd_list = NULL;
 	*/
-	launching_loop(mini);
+	launching_loop(data);
 }

@@ -2,17 +2,18 @@
 
 int			main(int argc, char **argv, char **env)
 {
-	t_mini		mini;
+	t_data		data;
 	int			ret;
 
 	(void)argc;
 	(void)argv;
 
-	initialize_mini(&mini);
-	if (SUCCESS != (ret = set_env_list(&mini, env))
-		|| SUCCESS != (ret = initialize_last_word(&mini))
-		|| SUCCESS != (ret = set_env_tab(&mini)))
-		quit(EXIT_FAILURE, &mini);
+	initialize_mini(&data);
+	if (SUCCESS != (ret = set_env_list(&data, env))
+		|| SUCCESS != (ret = initialize_last_word(&data))
+		|| SUCCESS != (ret = set_path(&data))
+		|| SUCCESS != (ret = set_env_tab(&data)))
+		quit(EXIT_FAILURE, &data);
 	/*g_sigint = false;
 	g_sigquit = false;
 	mini.lst_status = 0;
@@ -28,7 +29,7 @@ int			main(int argc, char **argv, char **env)
 		quit(EXIT_FAILURE, &mini);
 	}*/
 
-	minishell(&mini);
-	clean_mini(&mini);
+	minishell(&data);
+	clean_mini(&data);
 	return (0);
 }

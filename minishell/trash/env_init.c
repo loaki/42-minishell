@@ -3,20 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cchenot <cchenot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 04:16:34 by lulebugl          #+#    #+#             */
+<<<<<<< HEAD:minishell/srcs/env_init.c
+/*   Updated: 2020/10/12 17:02:26 by cchenot          ###   ########.fr       */
+=======
 /*   Updated: 2020/10/12 00:51:22 by lulebugl         ###   ########.fr       */
+>>>>>>> 1a1faa4fb971d8710c3fce5193f6a1c4275f81c6:minishell/trash/env_init.c
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	display_env(t_mini *mini)
+void	display_env(t_data *data)
 {
 	t_env	*tmp;
 
-	tmp = mini->env_list;
+	tmp = data->env_list;
 	while (tmp->next)
 	{
 		printf("%s=%s\n", tmp->key, tmp->value);
@@ -94,7 +98,7 @@ int		get_env(char *str, t_env *list)
 	return (0);
 }
 
-int		env_init(t_mini *minishell, char **env)
+int		env_init(t_data *data, char **env)
 {
 	int		i;
 	t_env	*elem;
@@ -117,6 +121,11 @@ int		env_init(t_mini *minishell, char **env)
 			return (ENOMEM);
 		}
 		ft_lstadd_back_env(&tmp, elem);
+<<<<<<< HEAD:minishell/srcs/env_init.c
+		if (i == 1)
+			data->env_list = tmp;
+=======
+>>>>>>> 1a1faa4fb971d8710c3fce5193f6a1c4275f81c6:minishell/trash/env_init.c
 		tmp = tmp->next;
 	}
 	if (minishell->env_list->next)

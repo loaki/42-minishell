@@ -1,11 +1,11 @@
 #include "../inc/minishell.h"
 
-void			launching_loop(t_mini *mini)
+void			launching_loop(t_data *data)
 {
 	t_list		*current;
 	t_list		*previous;
 
-	current = mini->cmd_list;
+	current = data->cmd_list;
 	previous = NULL;
 	while (current)
 	{

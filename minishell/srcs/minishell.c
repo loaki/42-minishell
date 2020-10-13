@@ -5,15 +5,16 @@ void		print_prompt(void)
 	ft_putstr_fd("Minishell$ ", 2);
 }
 
-void		initialize_mini(t_mini *mini)
+void		initialize_mini(t_data *data)
 {
-	mini->env_list = NULL;
-	mini->env_tab = NULL;
-	mini->last_word = NULL;
-	mini->cmd_list = NULL;
+	data->env_list = NULL;
+	data->env_tab = NULL;
+	data->last_word = NULL;
+	data->path_tab = NULL;	
+	data->cmd_list = NULL;
 }
 
-void		minishell(t_mini *mini)
+void		minishell(t_data *data)
 {
 	char	*line;
 	int		ret;
@@ -31,10 +32,10 @@ void		minishell(t_mini *mini)
 			//signal(SIGINT, sigint_handler_cmd);
 			//signal(SIGQUIT, sigquit_handler_cmd);
 			if (!ft_strcmp(line, "exit"))
-				quit(0, mini);
+				quit(0, data);
 			if (!ft_strcmp(line, "env"))
-				display_env(mini);			
-			manage_line(line, mini);
+				display_env(data);			
+			manage_line(line, data);
 		}
 	}
 }

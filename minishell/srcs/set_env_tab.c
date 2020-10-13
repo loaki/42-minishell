@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 05:00:32 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/12 06:06:36 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/13 07:08:00 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,42 +50,42 @@ static char	*get_env_str(t_env *env)
 	return (str);
 }
 
-static int	fill_env_tab(t_mini *mini)
+static int	fill_env_tab(t_data *data)
 {
 	int			i;
 	char		*last_word;
 	t_list		*current;
 
 	i = 0;
-	current = mini->env_list;
+	current = data->env_list;
 	while (current)
 	{
 		if (!empty_variable(current->content))
 		{
-			if (!(mini->env_tab[i] = get_env_str(current->content)))
+			if (!(data->env_tab[i] = get_env_str(current->content)))
 			{
-				ft_clean_tab_index(mini->env_tab, i);
-				mini->env_tab = NULL;
+				ft_clean_tab_index(data->env_tab, i);
+				data->env_tab = NULL;
 				return (ENOMEM);
 			}
 			i++;
 		}
 		current = current->next;
 	}
-	if (!(last_word = ft_str_join("_=", mini->last_word)))
+	if (!(last_word = ft_str_join("_=", data->last_word)))
 		return (ENOMEM);
-	mini->env_tab[i++] = last_word;
-	mini->env_tab[i] = NULL;
+	data->env_tab[i++] = last_word;
+	data->env_tab[i] = NULL;
 	return (SUCCESS);
 }
 
-static int	get_env_tab_size(t_mini *mini)
+static int	get_env_tab_size(t_data *data)
 {
 	int		size;
 	t_list	*current;
 
 	size = 0;
-	current = mini->env_list;
+	current = data->env_list;
 	while (current)
 	{
 		if (!empty_variable(current->content))
@@ -95,10 +95,10 @@ static int	get_env_tab_size(t_mini *mini)
 	return (size);
 }
 
-int			set_env_tab(t_mini *mini)
+int			set_env_tab(t_data *data)
 {
-	if (!(mini->env_tab = (char**)malloc(sizeof(*(mini->env_tab))
-		* (get_env_tab_size(mini) + 2))))
+	if (!(data->env_tab = (char**)malloc(sizeof(*(data->env_tab))
+		* (get_env_tab_size(data) + 2))))
 		return (ENOMEM);
-	return (fill_env_tab(mini));
+	return (fill_env_tab(data));
 }

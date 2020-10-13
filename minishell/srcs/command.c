@@ -90,7 +90,7 @@ static t_command	*create_new_command(char *line)
 	return (new_command);
 }
 
-int					add_new_command(char *line, t_mini *mini)
+int					add_new_command(char *line, t_data *data)
 {
 	t_command	*new_command;
 	t_list		*new_element;
@@ -102,7 +102,7 @@ int					add_new_command(char *line, t_mini *mini)
 		//clean_command(new_command);
 		return (ENOMEM);
 	}
-	ft_lstadd_back(&(mini->cmd_list), new_element);
+	ft_lstadd_back(&(data->cmd_list), new_element);
 	return (SUCCESS);
 }
 

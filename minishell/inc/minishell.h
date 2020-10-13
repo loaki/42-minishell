@@ -40,21 +40,31 @@ typedef struct			s_command
 	char				*str;
 }						t_command;
 
-typedef struct			s_mini
+typedef struct			s_data
 {
 	char				**env_tab;
+	char				**path_tab;
 	char				*last_word;
 	t_list				*env_list;
 	t_list				*cmd_list;
-
-}						t_mini;
+}						t_data;
 
 //lib
 void	                ft_putstr_fd(char *s, int fd);
 int		                get_next_line(int fd, char **line);
 
 //clean
-void		            clean_mini(t_mini *mini);
+void		            clean_mini(t_data *data);
+//error
+void		            put_error_msg(int error_code, char *id1, char *id2);
+//main
+void		            initialize_mini(t_data *data);
+//minishell
+void		            print_prompt(void);
+void		            minishell(t_data *data);
+//quit
+void		            quit(int code, t_data *data);
+void		            clean_mini(t_data *mini);
 
 //clean_utils.c
 void					ft_clean_tab(char **tab);
@@ -65,11 +75,11 @@ void		            put_error_msg(int error_code, char *id1, char *id2);
 
 //minishell
 void		            print_prompt(void);
-void		            initialize_mini(t_mini *mini);
-void		            minishell(t_mini *mini);
+void		            initialize_mini(t_data *mini);
+void		            minishell(t_data *mini);
 
 //quit
-void		            quit(int code, t_mini *mini);
+void		            quit(int code, t_data *mini);
 
 //signal
 void                    sigint_handler_cmd(int signal);
@@ -77,42 +87,46 @@ void                    sigquit_handler_cmd(int signal);
 void                    sigint_handler_sh(int signal);
 void                    sigquit_handler_sh(int signal);
 
-//set_env_list.c
+// env
+int						env_init(t_data *data, char **env);
+void					display_env(t_data *data);
+// set_env_list.c
 char					*get_key_from_env_line(char *env_line);
 char					*get_value_from_env_line(char *env_line);
-int						add_new_env_var(char *env_line, t_mini *mini);
-int						set_env_list(t_mini *mini, char **env);
-
+int						add_new_env_var(char *env_line, t_data *data);
+int						set_env_list(t_data *data, char **env);
 //set_env_tabs.c
-int						set_env_tab(t_mini *mini);
-
+int						set_env_tab(t_data *data);
 //set_env_utils.c
 int						empty_variable(t_env *env);
 int						is_end_key(char *str, int index);
 bool					is_initialized(char *env_line);
 void					clean_env_var(void *content);
-void					display_env(t_mini *minishell);
-
+void					display_env(t_data *data);
 // initialize_last_word.c
-int						initialize_last_word(t_mini *mini);
+int						initialize_last_word(t_data *data);
+//env_tools.c
+char					*get_env_value(char *key, t_data *data);
+//path.c
+int						set_path(t_data *data);
 
 //parsing.c
 bool					is_new_command(char *str, int index);
-int						parse_line(char *line, t_mini *mini);
+int						parse_line(char *line, t_data *mini);
 //static int				set_last_and_previous_word(t_mini *mini);
-void				manage_line(char *line, t_mini *mini);
+void				manage_line(char *line, t_data *mini);
 
 //command.c
 //static char				*create_new_command_str_fmt(char *old_str);
 char					*create_new_command_str(char *line);
 static t_command		*create_new_command(char *line);
-int						add_new_command(char *line, t_mini *mini);
+int						add_new_command(char *line, t_data *mini);
 
 //check_cmd.c
 bool					inside_quote(char *str, int index);
 
 //loop.c
-void			launching_loop(t_mini *mini);
+void			launching_loop(t_data *mini);
 
 
 #endif
