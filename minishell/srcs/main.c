@@ -11,6 +11,7 @@ int			main(int argc, char **argv, char **env)
 	initialize_mini(&data);
 	if (SUCCESS != (ret = set_env_list(&data, env))
 		|| SUCCESS != (ret = initialize_last_word(&data))
+		|| SUCCESS != (ret = set_path(&data))
 		|| SUCCESS != (ret = set_env_tab(&data)))
 		quit(EXIT_FAILURE, &data);
 	/*g_sigint = false;

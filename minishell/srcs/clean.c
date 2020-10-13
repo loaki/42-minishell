@@ -19,5 +19,7 @@ void		clean_mini(t_data *data)
 		ft_clean_tab(data->env_tab);
 	if (data->last_word)
 		free(data->last_word);
+	if (data->path_tab)
+		ft_clean_tab(data->path_tab);
 	initialize_mini(data);
 }

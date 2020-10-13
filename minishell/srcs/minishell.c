@@ -9,7 +9,8 @@ void		initialize_mini(t_data *data)
 {
 	data->env_list = NULL;
 	data->env_tab = NULL;
-	data->last_word = NULL;	
+	data->last_word = NULL;
+	data->path_tab = NULL;	
 }
 
 void		minishell(t_data *data)
@@ -32,7 +33,7 @@ void		minishell(t_data *data)
 			if (!ft_strcmp(line, "exit"))
 				quit(0, data);
 			if (!ft_strcmp(line, "env"))
-				display_env(data);			
+				display_env(data);	
 			//manage_line(line, mini);
 		}
 	}

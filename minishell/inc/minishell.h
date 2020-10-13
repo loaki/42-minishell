@@ -38,6 +38,7 @@ typedef struct			s_env
 typedef struct			s_data
 {
 	char				**env_tab;
+	char				**path_tab;
 	char				*last_word;
 	t_list				*env_list;
 }						t_data;
@@ -83,23 +84,24 @@ void                    sigquit_handler_sh(int signal);
 // env
 int						env_init(t_data *data, char **env);
 void					display_env(t_data *data);
-//set_env_list.c
+// set_env_list.c
 char					*get_key_from_env_line(char *env_line);
 char					*get_value_from_env_line(char *env_line);
 int						add_new_env_var(char *env_line, t_data *data);
 int						set_env_list(t_data *data, char **env);
-
 //set_env_tabs.c
 int						set_env_tab(t_data *data);
-
 //set_env_utils.c
 int						empty_variable(t_env *env);
 int						is_end_key(char *str, int index);
 bool					is_initialized(char *env_line);
 void					clean_env_var(void *content);
 void					display_env(t_data *data);
-
 // initialize_last_word.c
 int						initialize_last_word(t_data *data);
+//env_tools.c
+char					*get_env_value(char *key, t_data *data);
+//path.c
+int						set_path(t_data *data);
 
 #endif
