@@ -7,7 +7,7 @@ int			ft_add_fd(int *fd, char *input, int *i)
 	int		flag;
 
 	j = 0;
-	path = 0;
+	path = 0; 
 	flag = 0;
 	while (j < OPEN_MAX && fd[j] != 0)
 		j++;

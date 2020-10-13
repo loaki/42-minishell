@@ -9,7 +9,8 @@ void		initialize_mini(t_mini *mini)
 {
 	mini->env_list = NULL;
 	mini->env_tab = NULL;
-	mini->last_word = NULL;	
+	mini->last_word = NULL;
+	mini->cmd_list = NULL;
 }
 
 void		minishell(t_mini *mini)
@@ -33,7 +34,7 @@ void		minishell(t_mini *mini)
 				quit(0, mini);
 			if (!ft_strcmp(line, "env"))
 				display_env(mini);			
-			//manage_line(line, mini);
+			manage_line(line, mini);
 		}
 	}
 }

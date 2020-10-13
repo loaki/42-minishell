@@ -35,11 +35,18 @@ typedef struct			s_env
 	char				*value;
 }						t_env;
 
+typedef struct			s_command
+{
+	char				*str;
+}						t_command;
+
 typedef struct			s_mini
 {
 	char				**env_tab;
 	char				*last_word;
 	t_list				*env_list;
+	t_list				*cmd_list;
+
 }						t_mini;
 
 //lib
@@ -88,5 +95,24 @@ void					display_env(t_mini *minishell);
 
 // initialize_last_word.c
 int						initialize_last_word(t_mini *mini);
+
+//parsing.c
+bool					is_new_command(char *str, int index);
+int						parse_line(char *line, t_mini *mini);
+//static int				set_last_and_previous_word(t_mini *mini);
+void				manage_line(char *line, t_mini *mini);
+
+//command.c
+//static char				*create_new_command_str_fmt(char *old_str);
+char					*create_new_command_str(char *line);
+static t_command		*create_new_command(char *line);
+int						add_new_command(char *line, t_mini *mini);
+
+//check_cmd.c
+bool					inside_quote(char *str, int index);
+
+//loop.c
+void			launching_loop(t_mini *mini);
+
 
 #endif
