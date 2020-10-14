@@ -1,4 +1,4 @@
-#include "../inc/minishell.h"
+#include "minishell.h"
 
 bool		is_new_command(char *str, int index)
 {

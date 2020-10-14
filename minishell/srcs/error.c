@@ -1,4 +1,4 @@
-#include "../inc/minishell.h"
+#include "minishell.h"
 
 void			put_error_msg(int error_code, char *id1, char *id2)
 {

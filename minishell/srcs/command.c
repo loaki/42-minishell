@@ -1,4 +1,4 @@
-#include "../inc/minishell.h"
+#include "minishell.h"
 
 /*
 static char	*create_new_command_str_fmt(char *old_str)

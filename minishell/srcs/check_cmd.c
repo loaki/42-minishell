@@ -1,4 +1,4 @@
-#include "../inc/minishell.h"
+#include "minishell.h"
 /*
 bool		inside_quote(char *str, int index)
 {
