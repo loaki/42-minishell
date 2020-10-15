@@ -101,7 +101,7 @@ int						is_end_key(char *str, int index);
 bool					is_initialized(char *env_line);
 void					clean_env_var(void *content);
 //builtin_env.c
-int						builtin_env(t_command *command, t_data *data);
+int						builtin_env(void *command, t_data *data);
 //builtin_unset.c
 int						actualize_env_tab(t_data *data);
 int						builtin_unset(t_command *command, t_data *data);
@@ -109,13 +109,10 @@ int						builtin_unset(t_command *command, t_data *data);
 int						initialize_last_word(t_data *data);
 //env_tools.c
 char					*get_env_value(char *key, t_data *data);
-<<<<<<< HEAD
 int						compare_env_key(t_env *env, char *key);
-=======
 bool		key_not_found(t_data *data, char *key);
 bool		value_not_found(t_data *data, char *key);
 
->>>>>>> ac52c6a8ff58792d21476062bee37f02b01b5145
 //path.c
 int						set_path(t_data *data);
 

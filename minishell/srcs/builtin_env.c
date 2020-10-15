@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-int			builtin_env(t_command *command, t_data *data)
+int			builtin_env(void *cmd, t_data *data)
 {
-	int		i;
-
+	int			i;
+	t_command 	*command;
 	i = 0;
-	(void)command;
+	command = cmd;
 	while (data->env_tab[i + 1])
 	{
 		//ft_putstr_fd(data->env_tab[i], command->exit_fd);
