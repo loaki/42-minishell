@@ -6,16 +6,11 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 06:00:04 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/13 07:05:41 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/15 13:50:47 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int			compare_env_key(t_env *env, char *key)
-{
-	return (ft_strcmp(env->key, key));
-}
 
 int			search_key_in_env(char **str, char *key, t_data *mini)
 {

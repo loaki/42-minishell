@@ -89,7 +89,9 @@ void                    sigquit_handler_sh(int signal);
 
 // env
 int						env_init(t_data *data, char **env);
-void					display_env(t_data *data);
+int						actualize_path(t_data *data);
+int						actualize_env_tab(t_data *data);
+
 // set_env_list.c
 char					*get_key_from_env_line(char *env_line);
 char					*get_value_from_env_line(char *env_line);
@@ -102,11 +104,16 @@ int						empty_variable(t_env *env);
 int						is_end_key(char *str, int index);
 bool					is_initialized(char *env_line);
 void					clean_env_var(void *content);
-void					display_env(t_data *data);
+//builtin_env.c
+int						builtin_env(t_command *command, t_data *data);
+//builtin_unset.c
+int						actualize_env_tab(t_data *data);
+int						builtin_unset(t_command *command, t_data *data);
 // initialize_last_word.c
 int						initialize_last_word(t_data *data);
 //env_tools.c
 char					*get_env_value(char *key, t_data *data);
+int						compare_env_key(t_env *env, char *key);
 //path.c
 int						set_path(t_data *data);
 
