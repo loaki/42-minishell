@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int			set_cwd(t_data, data)
+int			set_cwd(t_data *data)
 {
 	char cwd[PATH_MAX];
 

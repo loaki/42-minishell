@@ -45,6 +45,7 @@ typedef struct			s_data
 	char				**env_tab;
 	char				**path_tab;
 	char				*last_word;
+	char				*cwd;
 	t_list				*env_list;
 	t_list				*cmd_list;
 }						t_data;
