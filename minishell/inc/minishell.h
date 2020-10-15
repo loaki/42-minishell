@@ -62,6 +62,10 @@ int		                get_next_line(int fd, char **line);
 void		            clean_mini(t_data *data);
 void					clean_command(void *content);
 
+//actualize_env
+int						actualize_env_tab(t_data *data);
+int						actualize_path(t_data *data);
+
 //error
 void		            put_error_msg(int error_code, char *id1, char *id2);
 //main
@@ -120,9 +124,10 @@ int						builtin_unset(t_command *command, t_data *data);
 int						initialize_last_word(t_data *data);
 //env_tools.c
 char					*get_env_value(char *key, t_data *data);
+int						get_dup_env_var_value(char **str, char *key, t_data *data);
 int						compare_env_key(t_env *env, char *key);
-bool		key_not_found(t_data *data, char *key);
-bool		value_not_found(t_data *data, char *key);
+bool					key_not_found(t_data *data, char *key);
+bool					value_not_found(t_data *data, char *key);
 
 //path.c
 int						set_path(t_data *data);
@@ -131,30 +136,43 @@ int						set_path(t_data *data);
 bool					is_new_command(char *str, int index);
 int						parse_line(char *line, t_data *mini);
 //static int				set_last_and_previous_word(t_mini *mini);
-void				manage_line(char *line, t_data *mini);
+void					manage_line(char *line, t_data *mini);
 
 //command.c
 bool					inside_quote(char *str, int index);
-static bool	before_special_char(char *str, int index);
-static bool	after_special_char(char *str, int index);
-static int	get_size_str_fmt(char *old_str);
+static bool				before_special_char(char *str, int index);
+static bool				after_special_char(char *str, int index);
+static int				get_size_str_fmt(char *old_str);
 static char				*create_new_command_str_fmt(char *old_str);
 char					*create_new_command_str(char *line);
 static t_command		*create_new_command(char *line);
 int						add_new_command(char *line, t_data *mini);
-char		**create_new_command_argv(char *str);
-bool		is_new_arg(char *str, int index);
-static char	*create_new_arg(char *str);
+char					**create_new_command_argv(char *str);
+bool					is_new_arg(char *str, int index);
+static char				*create_new_arg(char *str);
 
 //check_cmd.c
 
 //loop.c
-void			launching_loop(t_data *mini);
+void					launching_loop(t_data *mini);
 
 // builtin_pwd.c
-int     builtin_pwd(t_data *data, t_command *cmd);
+int     				builtin_pwd(t_data *data, t_command *cmd);
 
 // builtin_echo.c
-int     builtin_echo(t_data *data, t_command *cmd);
+int     				builtin_echo(t_data *data, t_command *cmd);
+
+// builtin_cd.c
+int         			get_path_cd(char **path, t_command *cmd, t_data data);
+int         			builtin_cd(t_command *cmd, t_data *data);
+
+// pwd.c
+char					*extend_path(char *old_path, char *new_dir);
+int						get_previous_pwd(char **pwd, char *path, t_data *data);
+int						replace_old_pwd(t_data *data);
+int						replace_pwd(char *path, t_data *data);
+int						restore_pwd_and_oldpwd(char *key, t_data *data);
+
+
 
 #endif
