@@ -73,10 +73,6 @@ void					ft_clean_tab_index(char **tab, int index);
 //error
 void		            put_error_msg(int error_code, char *id1, char *id2);
 
-//minishell
-void		            print_prompt(void);
-void		            initialize_mini(t_data *mini);
-void		            minishell(t_data *mini);
 
 //quit
 void		            quit(int code, t_data *mini);
