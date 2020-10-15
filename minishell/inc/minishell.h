@@ -1,10 +1,10 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define SUCCESS 0
-# define FAILURE 1
-# define EOF_GNL 0
-# define FAILURE_GNL -1
+# define SUCCESS 						0
+# define FAILURE 						1
+# define EOF_GNL						0
+# define FAILURE_GNL					-1
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -17,10 +17,13 @@
 # include <signal.h>
 # include "../lib/libft.h"
 
-# define SUCCESS 0
-# define FAILURE 1
-# define ERROR_KEY_NOT_FOUND -4
-# define ERROR_VALUE_NOT_FOUND -5
+# define SUCCESS 						0
+# define FAILURE 						1
+# define ERROR_NO_OLDPWD				-2
+# define ERROR_NO_HOME					-3
+# define ERROR_KEY_NOT_FOUND			-4
+# define ERROR_VALUE_NOT_FOUND			-5
+# define ERROR_FTL						-9
 
 # ifndef OPEN_MAX
 #  define OPEN_MAX 4000
