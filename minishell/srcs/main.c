@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+int			set_cwd(t_data, data)
+{
+	char cwd[PATH_MAX];
+
+	if (getcwd(cwd, PATH_MAX) == 0)
+		return(errno);
+	if (!(data->cwd = ft_strdup(cwd)))
+		return(ENOMEM);
+	return(SUCCESS);
+}
+
 int			main(int argc, char **argv, char **env)
 {
 	t_data		data;

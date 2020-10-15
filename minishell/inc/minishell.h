@@ -73,7 +73,6 @@ void					ft_clean_tab_index(char **tab, int index);
 //error
 void		            put_error_msg(int error_code, char *id1, char *id2);
 
-
 //quit
 void		            quit(int code, t_data *mini);
 
@@ -103,6 +102,9 @@ void					display_env(t_data *data);
 int						initialize_last_word(t_data *data);
 //env_tools.c
 char					*get_env_value(char *key, t_data *data);
+bool		key_not_found(t_data *data, char *key);
+bool		value_not_found(t_data *data, char *key);
+
 //path.c
 int						set_path(t_data *data);
 
@@ -124,5 +126,10 @@ bool					inside_quote(char *str, int index);
 //loop.c
 void			launching_loop(t_data *mini);
 
+// builtin_pwd.c
+int     builtin_pwd(t_data *data, t_command *cmd);
+
+// builtin_echo.c
+int     builtin_echo(t_data *data, t_command *cmd);
 
 #endif
