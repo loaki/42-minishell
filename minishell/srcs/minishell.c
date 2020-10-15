@@ -34,7 +34,7 @@ void		minishell(t_data *data)
 			if (!ft_strcmp(line, "exit"))
 				quit(0, data);
 			if (!ft_strcmp(line, "env"))
-				builtin_env(data->cmd_list, data);			
+				builtin_env(data->cmd_list, data);		
 			manage_line(line, data);
 		}
 	}
