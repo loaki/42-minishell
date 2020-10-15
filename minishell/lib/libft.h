@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:47:51 by jfeuilla          #+#    #+#             */
-/*   Updated: 2020/10/13 07:31:13 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/15 19:37:13 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ size_t			ft_strlen(const char *str);
 char			*ft_str_join(char const *s1, char const *s2);
 int				ft_strcmp(const char *s1, const char *s2);
 char			**ft_split(char const *s, char c);
+int				ft_isalnum(int c);
+int				ft_isalpha(int c);
 
 /*
 **	list

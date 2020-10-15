@@ -23,6 +23,7 @@
 # define ERROR_NO_HOME					-3
 # define ERROR_KEY_NOT_FOUND			-4
 # define ERROR_VALUE_NOT_FOUND			-5
+# define ERROR_INVALID_KEY 				-8
 # define ERROR_FTL						-9
 
 # ifndef OPEN_MAX
