@@ -38,6 +38,7 @@ typedef struct			s_env
 typedef struct			s_command
 {
 	char				*str;
+	char				**argv;
 }						t_command;
 
 typedef struct			s_data
@@ -55,6 +56,8 @@ int		                get_next_line(int fd, char **line);
 
 //clean
 void		            clean_mini(t_data *data);
+void					clean_command(void *content);
+
 //error
 void		            put_error_msg(int error_code, char *id1, char *id2);
 //main
@@ -75,11 +78,11 @@ void		            put_error_msg(int error_code, char *id1, char *id2);
 
 //minishell
 void		            print_prompt(void);
-void		            initialize_mini(t_data *mini);
-void		            minishell(t_data *mini);
+void		            initialize_mini(t_data *data);
+void		            minishell(t_data *data);
 
 //quit
-void		            quit(int code, t_data *mini);
+void		            quit(int code, t_data *data);
 
 //signal
 void                    sigint_handler_cmd(int signal);
@@ -117,13 +120,19 @@ int						parse_line(char *line, t_data *mini);
 void				manage_line(char *line, t_data *mini);
 
 //command.c
-//static char				*create_new_command_str_fmt(char *old_str);
+bool					inside_quote(char *str, int index);
+static bool	before_special_char(char *str, int index);
+static bool	after_special_char(char *str, int index);
+static int	get_size_str_fmt(char *old_str);
+static char				*create_new_command_str_fmt(char *old_str);
 char					*create_new_command_str(char *line);
 static t_command		*create_new_command(char *line);
 int						add_new_command(char *line, t_data *mini);
+char		**create_new_command_argv(char *str);
+bool		is_new_arg(char *str, int index);
+static char	*create_new_arg(char *str);
 
 //check_cmd.c
-bool					inside_quote(char *str, int index);
 
 //loop.c
 void			launching_loop(t_data *mini);

@@ -82,4 +82,6 @@ void	manage_line(char *line, t_data *data)
 	mini->cmd_list = NULL;
 	*/
 	launching_loop(data);
+	ft_lstclear(&(data->cmd_list), clean_command);
+	data->cmd_list = NULL;
 }
