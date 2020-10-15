@@ -46,6 +46,7 @@ typedef struct			s_data
 	char				**env_tab;
 	char				**path_tab;
 	char				*last_word;
+	char				*cwd;
 	t_list				*env_list;
 	t_list				*cmd_list;
 }						t_data;
@@ -92,7 +93,9 @@ void                    sigquit_handler_sh(int signal);
 
 // env
 int						env_init(t_data *data, char **env);
-void					display_env(t_data *data);
+int						actualize_path(t_data *data);
+int						actualize_env_tab(t_data *data);
+
 // set_env_list.c
 char					*get_key_from_env_line(char *env_line);
 char					*get_value_from_env_line(char *env_line);
@@ -105,11 +108,19 @@ int						empty_variable(t_env *env);
 int						is_end_key(char *str, int index);
 bool					is_initialized(char *env_line);
 void					clean_env_var(void *content);
-void					display_env(t_data *data);
+//builtin_env.c
+int						builtin_env(void *command, t_data *data);
+//builtin_unset.c
+int						actualize_env_tab(t_data *data);
+int						builtin_unset(t_command *command, t_data *data);
 // initialize_last_word.c
 int						initialize_last_word(t_data *data);
 //env_tools.c
 char					*get_env_value(char *key, t_data *data);
+int						compare_env_key(t_env *env, char *key);
+bool		key_not_found(t_data *data, char *key);
+bool		value_not_found(t_data *data, char *key);
+
 //path.c
 int						set_path(t_data *data);
 
@@ -137,5 +148,10 @@ static char	*create_new_arg(char *str);
 //loop.c
 void			launching_loop(t_data *mini);
 
+// builtin_pwd.c
+int     builtin_pwd(t_data *data, t_command *cmd);
+
+// builtin_echo.c
+int     builtin_echo(t_data *data, t_command *cmd);
 
 #endif

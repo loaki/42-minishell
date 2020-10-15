@@ -16,8 +16,9 @@ OBJLIB_PATH = ./obj
 
 INC_NAME = minishell.h
 SRC_NAME = clean.c clean_utils.c error.c main.c minishell.c quit.c signal.c set_env_list.c \
-			set_env_utils.c set_env_tab.c initialize_last_word.c parsing.c command.c \
-			check_cmd.c loop.c path.c env_tools.c
+			set_env_utils.c set_env_tab.c initialize_last_word.c parsing.c command.c 		\
+			check_cmd.c loop.c path.c env_tools.c builtin_env.c			\
+
 LIB_NAME = ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c get_next_line.c get_next_line_utils.c \
 			ft_lstadd_back.c ft_lstnew.c ft_lstclear.c ft_putstr_fd_and_color.c \
 			ft_str_join.c ft_strcmp.c ft_lstremove_if.c ft_split.c
