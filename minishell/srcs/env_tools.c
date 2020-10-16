@@ -5,7 +5,7 @@ int			compare_env_key(t_env *env, char *key)
 	return (ft_strcmp(env->key, key));
 }
 
-char		*get_env_value(char *key, t_data *data)
+char		*get_env_var_value(char *key, t_data *data)
 {
 	t_list		*current;
 	t_env		*env_var;

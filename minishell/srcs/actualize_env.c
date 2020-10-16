@@ -21,10 +21,10 @@ int			actualize_path(t_data *data)
 {
 	int		ret;
 
-	if (data->path)
+	if (data->path_tab)
 	{
-		ft_clean_tab(data->path);
-		data->path = NULL;
+		ft_clean_tab(data->path_tab);
+		data->path_tab = NULL;
 	}
 	if (SUCCESS != (ret = set_path(data)))
 	{

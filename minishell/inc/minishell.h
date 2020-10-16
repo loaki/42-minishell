@@ -120,16 +120,18 @@ void					clean_env_var(void *content);
 int						builtin_env(void *command, t_data *data);
 //builtin_unset.c
 int						actualize_env_tab(t_data *data);
+bool					check_key_ok(char *key);
 int						builtin_unset(t_command *command, t_data *data);
 // initialize_last_word.c
 int						initialize_last_word(t_data *data);
 //env_tools.c
-char					*get_env_value(char *key, t_data *data);
+char					*get_env_var_value(char *key, t_data *data);
 int						get_dup_env_var_value(char **str, char *key, t_data *data);
 int						compare_env_key(t_env *env, char *key);
 bool					key_not_found(t_data *data, char *key);
 bool					value_not_found(t_data *data, char *key);
-
+//env_manipulation.c
+int						set_env_var_value(char *key, char *new_value, t_data *data);
 //path.c
 int						set_path(t_data *data);
 

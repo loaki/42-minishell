@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 07:16:10 by lulebugl          #+#    #+#             */
-/*   Updated: 2020/10/13 07:33:40 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/16 17:48:44 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			set_path(t_data *data)
 	char		*path;
 	char		**path_tab;
 
-	if (!(path = get_env_value("PATH", data)))
+	if (!(path = get_env_var_value("PATH", data)))
 	{
 		data->path_tab = NULL;
 		return (SUCCESS);
