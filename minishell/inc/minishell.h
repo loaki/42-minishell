@@ -167,6 +167,8 @@ int     				builtin_echo(t_data *data, t_command *cmd);
 int         			get_path_cd(char **path, t_command *cmd, t_data data);
 int         			builtin_cd(t_command *cmd, t_data *data);
 
+// builtin_export.c
+int						builtin_export(t_command *command, t_data *data);
 // pwd.c
 char					*extend_path(char *old_path, char *new_dir);
 int						get_previous_pwd(char **pwd, char *path, t_data *data);

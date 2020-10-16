@@ -68,11 +68,6 @@ static int	check_unset_args(t_command *command)
 	return (SUCCESS);
 }
 
-// int			compare_env_var(t_env_var *env_var, char *key)
-// {
-// 	return (ft_strcmp(env_var->key, key));
-// }
-
 int			builtin_unset(t_command *command, t_data *data)
 {
 	int		i;

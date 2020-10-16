@@ -6,7 +6,7 @@
 /*   By: lulebugl <lulebugl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:47:51 by jfeuilla          #+#    #+#             */
-/*   Updated: 2020/10/15 19:37:13 by lulebugl         ###   ########.fr       */
+/*   Updated: 2020/10/16 15:29:39 by lulebugl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ void			ft_lstadd_back(t_list **alst, t_list *new);
 void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstremove_if(t_list **begin_list, void *data_ref,
 										int (*cmp)(), void (*clean_fct)());
+void			ft_lstadd_sort(t_list **alst, t_list *new,
+										int sort(void *, void *));
 
 #endif

@@ -23,6 +23,8 @@ void			launching_loop(t_data *data)
 			ft_putstr_fd("\n", 1);
 			//if (!ft_strcmp(c->argv[i], "unset"))
 			//	builtin_unset(c, data);
+			if (!ft_strcmp(c->argv[i], "export"))
+				builtin_export(c, data);
 		}
 
 		previous = current;
