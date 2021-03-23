@@ -1,59 +1,68 @@
-.PHONY: all clean fclean re norme
+NAME	=	minishell
 
-##CC = clang-9
-CC = clang -g ## clang-9 doesn't work on my ubuntu
-##CC = gcc
+C_DIR	=	src
 
-FLAGS = -Wall -Wextra -Werror
+O_DIR	=	obj
 
-NAME = minishell
+SRCS	=	${patsubst %, ${C_DIR}/%, ${C_FILES}}
 
-SRC_PATH = ./srcs
-LIB_PATH = ./lib
-INC_PATH = ./inc
-OBJ_PATH = ./obj
-OBJLIB_PATH = ./obj
+C_FILES	=	main.c\
+			minishell.c\
+			minishell_init_utils.c\
+			signals_handler.c\
+			prompt.c\
+			process_input.c\
+			tokenizer.c\
+			tokenizer_get_token.c\
+			tokenizer_utils.c\
+			token_to_cmdlist.c\
+			shell_expansions.c\
+			variables_expansions.c\
+			word_splitting.c\
+			quote_removal.c\
+			redirection.c\
+			execute_builtin.c\
+			execute_cmd.c\
+			execute_cmd_search_path.c\
+			utils.c\
+			utils_str_tab.c\
+			utils_pipe.c\
+			builtin_env.c\
+			builtin_pwd.c\
+			builtin_env_utils.c\
+			builtin_export.c\
+			builtin_unset.c\
+			builtin_export_print.c\
+			builtin_echo.c\
+			builtin_exit.c\
+			builtin_cd.c
 
-INC_NAME = minishell.h
-SRC_NAME = clean.c clean_utils.c error.c main.c minishell.c quit.c signal.c set_env_list.c \
-			set_env_utils.c set_env_tab.c initialize_last_word.c parsing.c command.c 		\
-			check_cmd.c loop.c path.c env_tools.c builtin_env.c	builtin_unset.c		\
-			builtin_export.c builtin_export_utils.c env_manipulation.c
-LIB_NAME = ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c get_next_line.c get_next_line_utils.c \
-			ft_lstadd_back.c ft_lstnew.c ft_lstclear.c ft_putstr_fd_and_color.c \
-			ft_str_join.c ft_strcmp.c ft_lstremove_if.c ft_split.c ft_isalnum.c	\
-			ft_isalpha.c ft_lstadd_sort.c
-OBJ_NAME = $(SRC_NAME:.c=.o)
-OBJLIB_NAME = $(LIB_NAME:.c=.o)
+OBJS	=	${patsubst ${C_DIR}/%, ${O_DIR}/%, ${SRCS:.c=.o}}
 
-SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
-LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
-INC = $(addprefix $(INC_PATH)/, $(INC_NAME))
-OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-OBJLIB = $(addprefix $(OBJLIB_PATH)/,$(OBJLIB_NAME))
+CC		=	clang
 
-all: $(NAME)
+CFLAGS	=	-I./inc/ -g -Wall -Wextra -Werror
 
-$(NAME): $(OBJ) $(OBJLIB)
-	${CC} -Wall -Wextra -Werror -I ${INC_PATH} -o ${NAME} ${OBJLIB} ${OBJ}
+LIBS	=	libft/libft.a
 
-valgrind: $(OBJ) $(OBJLIB)
-	${CC} -Wall -Wextra -Werror -g -o ${NAME} ${OBJLIB} ${OBJ} 
-	valgrind --leak-check=full --show-leak-kinds=all ./minishell
-	#valgrind --leak-check=full ./minishell
+all:		${NAME}
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	${CC} -I ${INC_PATH} -o $@ -c $<
+${NAME}:	${OBJS}
+			${MAKE} -C libft
+			${CC} ${CFLAGS} ${OBJS} ${LIBS} -o ${NAME}
 
-$(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
-	@mkdir $(OBJLIB_PATH) 2> /dev/null || true
-	$(CC) -o $@ -c $<
+${O_DIR}/%.o : ${C_DIR}/%.c
+			@mkdir -p obj
+			${CC} ${CFLAGS} -c $< -o $@
+
+.PHONY:		clean fclean re .c.o all
 
 clean:
-	rm -rf $(OBJ) $(OBJLIB)
+			rm -rf ${O_DIR}
+			${MAKE}	-C libft clean
 
-fclean: clean
-	rm -rf ./obj $(NAME)
+fclean:		clean
+			rm -f ${NAME}
+			${MAKE} -C libft fclean
 
-re: fclean all
+re:			fclean all

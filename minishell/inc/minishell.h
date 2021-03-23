@@ -1,183 +1,149 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lucisanc <lucisanc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/21 15:52:35 by lucisanc          #+#    #+#             */
+/*   Updated: 2021/03/20 15:08:19 by lucisanc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define SUCCESS 						0
-# define FAILURE 						1
-# define EOF_GNL						0
-# define FAILURE_GNL					-1
-
 # include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdbool.h>
 # include <errno.h>
+# include <stdbool.h>
+# include <signal.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
 # include <fcntl.h>
 # include <string.h>
-# include <limits.h>
-# include <signal.h>
-# include "../lib/libft.h"
 
-# define SUCCESS 						0
-# define FAILURE 						1
-# define ERROR_NO_OLDPWD				-2
-# define ERROR_NO_HOME					-3
-# define ERROR_KEY_NOT_FOUND			-4
-# define ERROR_VALUE_NOT_FOUND			-5
-# define ERROR_INVALID_KEY 				-8
-# define ERROR_FTL						-9
+# include "libft.h"
 
-# ifndef OPEN_MAX
-#  define OPEN_MAX 4000
-# endif
+# define METACHAR	" \t\n;|<>"
+# define OPERATOR	";|<>"
+# define BLANKS		" \t"
 
-bool                    g_sigint;
-bool                    g_sigquit;
+# define E_QUOTE	'\''
+# define E_DQUOTE	'"'
+# define E_ESCAPE	'\\'
 
-typedef struct			s_env
+# define O_LESS		'<'
+# define O_GREAT	'>'
+# define O_DGREAT	">>"
+# define O_PIPE		'|'
+# define O_SEMI		';'
+# define O_DSEMI	";;"
+
+typedef enum	e_token_tag
 {
-	char				*key;
-	char				*value;
-}						t_env;
+	T_WORD = 0,
+	T_CTRL_OPE,
+	T_REDIR_OPE,
+	T_OPERAND
+}				t_token_tag;
 
-typedef struct			s_command
+typedef struct	s_minishell
 {
-	char				*str;
-	char				**argv;
-}						t_command;
+	bool		is_interactive;
+	int			exit_status;
+	char		*cwd;
+	bool		exit;
+	int			stdio_save[2];
+}				t_minishell;
 
-typedef struct			s_data
+typedef struct	s_token
 {
-	char				**env_tab;
-	char				**path_tab;
-	char				*last_word;
-	char				*cwd;
-	t_list				*env_list;
-	t_list				*cmd_list;
-}						t_data;
+	char		*value;
+	t_token_tag	tag;
+}				t_token;
 
-//lib
-void	                ft_putstr_fd(char *s, int fd);
-int		                get_next_line(int fd, char **line);
+typedef struct	s_cmd
+{
+	t_list		*args;
+	char		**args_tab;
+	int			fd_output[2];
+	int			fd_input[2];
+	pid_t		pid;
+	char		ctrl_ope;
+	bool		is_async;
+}				t_cmd;
 
-//clean
-void		            clean_mini(t_data *data);
-void					clean_command(void *content);
+char			**g_env;
+bool			g_sig_int;
 
-//actualize_env
-int						actualize_env_tab(t_data *data);
-int						actualize_path(t_data *data);
+int				minishell(int argc, char **argv, char **envp);
+char			**create_basic_env(void);
+int				prompt(t_minishell *shell_info);
+int				print_prompt(void);
+int				process_input(t_minishell *shell_info, char *input);
+int				tokenizer(char *input, t_list **tokens);
+int				token_to_cmdlist(t_list *tokens, t_list **cmd_list);
+int				shell_expansions(t_cmd *cmd, t_minishell *shell_info);
+int				redirection(t_cmd *cmd);
+void			execute_cmd(t_minishell *minishell, char **argv);
 
-//error
-void		            put_error_msg(int error_code, char *id1, char *id2);
-//main
-void		            initialize_mini(t_data *data);
-//minishell
-void		            print_prompt(void);
-void		            minishell(t_data *data);
-//quit
-void		            quit(int code, t_data *data);
-void		            clean_mini(t_data *mini);
+/*
+** built-in
+*/
+int				ft_cd(char **args);
+int				ft_echo(char **argv);
+int				ft_env(void);
+int				ft_pwd(void);
+int				ft_unset(char **args);
+int				ft_exit(char **args, t_minishell *shell_info);
+int				ft_export(char **argv);
 
-//clean_utils.c
-void					ft_clean_tab(char **tab);
-void					ft_clean_tab_index(char **tab, int index);
+/*
+** signals handler
+*/
+void			sigquit_handler(int num);
+void			sigint_handler_prompting(int num);
+void			sigint_handler_executing(int num);
 
-//error
-void		            put_error_msg(int error_code, char *id1, char *id2);
-
-//minishell
-void		            print_prompt(void);
-void		            initialize_mini(t_data *data);
-void		            minishell(t_data *data);
-
-//quit
-void		            quit(int code, t_data *data);
-
-//signal
-void                    sigint_handler_cmd(int signal);
-void                    sigquit_handler_cmd(int signal);
-void                    sigint_handler_sh(int signal);
-void                    sigquit_handler_sh(int signal);
-
-// env
-int						env_init(t_data *data, char **env);
-int						actualize_path(t_data *data);
-int						actualize_env_tab(t_data *data);
-
-// set_env_list.c
-char					*get_key_from_env_line(char *env_line);
-char					*get_value_from_env_line(char *env_line);
-int						add_new_env_var(char *env_line, t_data *data);
-int						set_env_list(t_data *data, char **env);
-//set_env_tabs.c
-int						set_env_tab(t_data *data);
-//set_env_utils.c
-int						empty_variable(t_env *env);
-int						is_end_key(char *str, int index);
-bool					is_initialized(char *env_line);
-void					clean_env_var(void *content);
-//builtin_env.c
-int						builtin_env(void *command, t_data *data);
-//builtin_unset.c
-int						actualize_env_tab(t_data *data);
-bool					check_key_ok(char *key);
-int						builtin_unset(t_command *command, t_data *data);
-// initialize_last_word.c
-int						initialize_last_word(t_data *data);
-//env_tools.c
-char					*get_env_var_value(char *key, t_data *data);
-int						get_dup_env_var_value(char **str, char *key, t_data *data);
-int						compare_env_key(t_env *env, char *key);
-bool					key_not_found(t_data *data, char *key);
-bool					value_not_found(t_data *data, char *key);
-//env_manipulation.c
-int						set_env_var_value(char *key, char *new_value, t_data *data);
-//path.c
-int						set_path(t_data *data);
-
-//parsing.c
-bool					is_new_command(char *str, int index);
-int						parse_line(char *line, t_data *mini);
-//static int				set_last_and_previous_word(t_mini *mini);
-void					manage_line(char *line, t_data *mini);
-
-//command.c
-bool					inside_quote(char *str, int index);
-static bool				before_special_char(char *str, int index);
-static bool				after_special_char(char *str, int index);
-static int				get_size_str_fmt(char *old_str);
-static char				*create_new_command_str_fmt(char *old_str);
-char					*create_new_command_str(char *line);
-static t_command		*create_new_command(char *line);
-int						add_new_command(char *line, t_data *mini);
-char					**create_new_command_argv(char *str);
-bool					is_new_arg(char *str, int index);
-static char				*create_new_arg(char *str);
-
-//check_cmd.c
-
-//loop.c
-void					launching_loop(t_data *mini);
-
-// builtin_pwd.c
-int     				builtin_pwd(t_data *data, t_command *cmd);
-
-// builtin_echo.c
-int     				builtin_echo(t_data *data, t_command *cmd);
-
-// builtin_cd.c
-int         			get_path_cd(char **path, t_command *cmd, t_data data);
-int         			builtin_cd(t_command *cmd, t_data *data);
-
-// builtin_export.c
-int						builtin_export(t_command *command, t_data *data);
-// pwd.c
-char					*extend_path(char *old_path, char *new_dir);
-int						get_previous_pwd(char **pwd, char *path, t_data *data);
-int						replace_old_pwd(t_data *data);
-int						replace_pwd(char *path, t_data *data);
-int						restore_pwd_and_oldpwd(char *key, t_data *data);
-
-
+/*
+** utils
+*/
+char			*ft_getenv(char	*name);
+int				check_n_export(char *var, int *error);
+int				ft_add_to_env(char *var);
+int				ft_remove_from_env(char *name);
+char			*ft_get_var_value(char *var);
+char			*ft_get_var_name(char *var);
+int				check_var_syntaxe(char *var);
+char			**ft_tabdup(char **tab);
+char			**ft_find_in_env(char *name);
+int				table_len(char **tab);
+void			free_tab(char **tab);
+char			**lst_to_str_tab(t_list *lst);
+t_list			*str_tab_to_lst(char **tab);
+int				ft_strappend(char	**dst, char	*src);
+void			ft_strsort(char **tab, int first, int last);
+void			free_cmd(void *void_cmd);
+int				pass_quote(char *input, int *end);
+int				get_token(char *str, int *i, t_token **token);
+t_token			*new_token(char	*new_value, t_token_tag new_tag);
+char			**t_tokens_to_chartab(t_list *lst);
+void			free_token(void *void_token);
+int				word_splitting(t_list ***tokens);
+int				variables_expansions(char **str, t_minishell *shell_info);
+int				*quote_removal(char **str);
+void			save_stdio(int stdio_save[2]);
+void			reset_stdio(int save_stdio[2]);
+int				put_error(char *func_name, char *error_cause,
+							char *error_desc, int errno_value);
+int				pass_until_c(char *input, int *end, char c);
+void			close_pipe(int pipe[2]);
+int				pass_quote(char *input, int *end);
+int				pass_d_quote(char *input, int *end);
+char			*search_path(char **argv);
+int				check_invalid_token(t_list *tokens);
+char			*get_export_output_string(void);
+void			search_n_exec(t_minishell *shell_info, char **argv);
 
 #endif
